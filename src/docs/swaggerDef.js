@@ -1,6 +1,12 @@
 const { version } = require('../../package.json');
 const config = require('../config/config');
 
+let hostName = 'localhost';
+
+if (typeof window !== 'undefined') {
+  hostName = window.location.hostname;
+}
+
 const swaggerDef = {
   openapi: '3.0.0',
   info: {
@@ -13,7 +19,7 @@ const swaggerDef = {
   },
   servers: [
     {
-      url: `http://localhost:${config.port}/v1`,
+      url: `http://${hostName}:${config.port}/v1`,
     },
   ],
 };
