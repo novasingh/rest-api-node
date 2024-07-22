@@ -28,7 +28,7 @@ module.exports = router;
  * @swagger
  * /auth/register:
  *   post:
- *     summary: Register as user
+ *     summary: Register as driver
  *     tags: [Auth]
  *     requestBody:
  *       required: true

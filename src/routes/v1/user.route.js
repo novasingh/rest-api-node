@@ -30,7 +30,7 @@ module.exports = router;
  * @swagger
  * /users:
  *   post:
- *     summary: Create a user
+ *     summary: Create a driver
  *     description: Only admins can create other users.
  *     tags: [Users]
  *     security:
