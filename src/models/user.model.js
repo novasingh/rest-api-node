@@ -6,7 +6,12 @@ const { roles } = require('../config/roles');
 
 const userSchema = mongoose.Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
       type: String,
       required: true,
       trim: true,
@@ -35,10 +40,37 @@ const userSchema = mongoose.Schema(
       },
       private: true, // used by the toJSON plugin
     },
+    dob: {
+      type: Date,
+    },
+    phone: {
+      type: String,
+      trim: true,
+    },
+    address: {
+      type: String,
+      trim: true,
+    },
+    driverN: {
+      type: String,
+      trim: true,
+    },
+    truckN: {
+      type: String,
+      trim: true,
+    },
+    licensePlate: {
+      type: String,
+      trim: true,
+    },
+    insuranceN: {
+      type: String,
+      trim: true,
+    },
     role: {
       type: String,
       enum: roles,
-      default: 'user',
+      default: 'driver',
     },
     isEmailVerified: {
       type: Boolean,

@@ -8,14 +8,14 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageUsers'), validate(userValidation.createUser), userController.createUser)
-  .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
+  .post(auth('manage'), validate(userValidation.createUser), userController.createUser)
+  .get(auth('get'), validate(userValidation.getUsers), userController.getUsers);
 
 router
   .route('/:userId')
-  .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
-  .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
-  .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
+  .get(auth('get'), validate(userValidation.getUser), userController.getUser)
+  .patch(auth('manage'), validate(userValidation.updateUser), userController.updateUser)
+  .delete(auth('manage'), validate(userValidation.deleteUser), userController.deleteUser);
 
 module.exports = router;
 
@@ -42,7 +42,8 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - firstName
+ *               - lastName
  *               - email
  *               - password
  *               - role
@@ -60,12 +61,13 @@ module.exports = router;
  *                 description: At least one number and one letter
  *               role:
  *                  type: string
- *                  enum: [user, admin]
+ *                  enum: [driver, manager]
  *             example:
- *               name: fake name
+ *               firstName: fake
+ *               lastName: name
  *               email: fake@example.com
  *               password: password1
- *               role: user
+ *               role: driver
  *     responses:
  *       "201":
  *         description: Created
@@ -87,11 +89,6 @@ module.exports = router;
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: query
- *         name: name
- *         schema:
- *           type: string
- *         description: User name
  *       - in: query
  *         name: role
  *         schema:
@@ -196,7 +193,9 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               firstName:
+ *                 type: string
+ *               lasttName:
  *                 type: string
  *               email:
  *                 type: string
@@ -208,7 +207,8 @@ module.exports = router;
  *                 minLength: 8
  *                 description: At least one number and one letter
  *             example:
- *               name: fake name
+ *               firstName: fake
+ *               lasttName: User
  *               email: fake@example.com
  *               password: password1
  *     responses:

@@ -29,11 +29,17 @@ defaultRoutes.forEach((route) => {
   router.use(route.path, route.route);
 });
 
+// Enable this code in production mode to hide swager
 /* istanbul ignore next */
-if (config.env === 'development') {
-  devRoutes.forEach((route) => {
-    router.use(route.path, route.route);
-  });
-}
+// if (config.env === 'development') {
+//   devRoutes.forEach((route) => {
+//     router.use(route.path, route.route);
+//   });
+// }
+
+// comment this code in production mode
+devRoutes.forEach((route) => {
+  router.use(route.path, route.route);
+});
 
 module.exports = router;

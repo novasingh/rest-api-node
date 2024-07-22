@@ -8,15 +8,32 @@ components:
         email:
           type: string
           format: email
-        name:
+        firstName:
           type: string
+        lastName:
+          type: string
+        dob:
+          type: date
+        phone:
+          type: string
+        address:
+          type: string
+        driverN:
+          type: string
+        truckN:
+          type: string
+        licensePlate:
+          type: string
+        insuranceN:
+          type: string              
         role:
           type: string
-          enum: [user, admin]
+          enum: [driver, manager]
       example:
         id: 5ebac534954b54139806c112
         email: fake@example.com
-        name: fake name
+        firstName: fake
+        lastName: name
         role: user
 
     Token:

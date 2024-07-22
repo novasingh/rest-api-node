@@ -5,14 +5,23 @@ const createUser = {
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().custom(password),
-    name: Joi.string().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
     role: Joi.string().required().valid('user', 'admin'),
   }),
 };
 
 const getUsers = {
   query: Joi.object().keys({
-    name: Joi.string(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    dob: Joi.date(),
+    phone: Joi.string(),
+    address: Joi.string(),
+    driverN: Joi.string(),
+    TruckN: Joi.string(),
+    licensePlate: Joi.string(),
+    insuranceN: Joi.string(),
     role: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
@@ -34,7 +43,15 @@ const updateUser = {
     .keys({
       email: Joi.string().email(),
       password: Joi.string().custom(password),
-      name: Joi.string(),
+      firstName: Joi.string(),
+      lastName: Joi.string(),
+      dob: Joi.date(),
+      phone: Joi.string(),
+      address: Joi.string(),
+      driverN: Joi.string(),
+      TruckN: Joi.string(),
+      licensePlate: Joi.string(),
+      insuranceN: Joi.string(),
     })
     .min(1),
 };

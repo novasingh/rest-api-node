@@ -9,16 +9,16 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
   }
   req.user = user;
 
-  console.log(requiredRights)
-
   if (requiredRights.length) {
     const userRights = roleRights.get(user.role);
-    console.log('User Right:', userRights)
-    const hasRequiredRights = requiredRights.every((requiredRight) => userRights.includes(requiredRight));
-    console.log('hasRequiredRights:', hasRequiredRights)
-    console.log('req.params.userId', req.params.userId)
-    console.log('user.id', user.id)
-    if (!hasRequiredRights ) {
+    console.log('requiredRights:', requiredRights )
+    console.log('userRights:', userRights)
+    const hasRequiredRights = requiredRights.every((requiredRight) => {
+      console.log('requiredRight:', requiredRight )
+      return userRights.includes(requiredRight)
+    
+  });
+    if (!hasRequiredRights) {
       return reject(new ApiError(httpStatus.FORBIDDEN, 'Forbidden'));
     }
   }
@@ -26,13 +26,14 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
   resolve();
 };
 
-const auth = (...requiredRights) => async (req, res, next) => {
-  console.log('req', req)
-  return new Promise((resolve, reject) => {
-    passport.authenticate('jwt', { session: false }, verifyCallback(req, resolve, reject, requiredRights))(req, res, next);
-  })
-    .then(() => next())
-    .catch((err) => next(err));
-};
+const auth =
+  (...requiredRights) =>
+  async (req, res, next) => {
+    return new Promise((resolve, reject) => {
+      passport.authenticate('jwt', { session: false }, verifyCallback(req, resolve, reject, requiredRights))(req, res, next);
+    })
+      .then(() => next())
+      .catch((err) => next(err));
+  };
 
 module.exports = auth;
