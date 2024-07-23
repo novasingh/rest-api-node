@@ -42,10 +42,8 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - firstName
- *               - lastName
+ *               - name
  *               - email
- *               - password
  *               - role
  *             properties:
  *               name:
@@ -54,19 +52,12 @@ module.exports = router;
  *                 type: string
  *                 format: email
  *                 description: must be unique
- *               password:
- *                 type: string
- *                 format: password
- *                 minLength: 8
- *                 description: At least one number and one letter
  *               role:
  *                  type: string
  *                  enum: [driver, manager]
  *             example:
- *               firstName: fake
- *               lastName: name
+ *               name: user 1
  *               email: fake@example.com
- *               password: password1
  *               role: driver
  *     responses:
  *       "201":
