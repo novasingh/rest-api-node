@@ -7,6 +7,13 @@ const createUser = {
     password: Joi.string(),
     name: Joi.string().required(),
     role: Joi.string().required().valid('driver', 'manager'),
+    dob: Joi.date(),
+    phone: Joi.string(),
+    address: Joi.string(),
+    driverN: Joi.string(),
+    truckN: Joi.string(),
+    licensePlate: Joi.string(),
+    insuranceN: Joi.string(),
   }),
 };
 
@@ -18,7 +25,7 @@ const getUsers = {
     phone: Joi.string(),
     address: Joi.string(),
     driverN: Joi.string(),
-    TruckN: Joi.string(),
+    truckN: Joi.string(),
     licensePlate: Joi.string(),
     insuranceN: Joi.string(),
     role: Joi.string(),
@@ -48,7 +55,7 @@ const updateUser = {
       phone: Joi.string(),
       address: Joi.string(),
       driverN: Joi.string(),
-      TruckN: Joi.string(),
+      truckN: Joi.string(),
       licensePlate: Joi.string(),
       insuranceN: Joi.string(),
     })
