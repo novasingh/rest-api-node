@@ -25,6 +25,8 @@ module.exports = router;
  *   post:
  *     summary: Save token in database
  *     tags: [Fitbit Token]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: userId
@@ -77,6 +79,8 @@ module.exports = router;
  *   get:
  *     summary: Get fitbit tokens
  *     tags: [Fitbit Token]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: userId
