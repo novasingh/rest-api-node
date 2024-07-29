@@ -10,6 +10,7 @@ const getToken = {
     user: Joi.string(),
     type: Joi.string(),
     expires: Joi.date(),
+    code: Joi.string(),
   }),
 };
 
@@ -23,6 +24,7 @@ const saveToken = {
     user: Joi.string(),
     type: Joi.string(),
     expires: Joi.date(),
+    code: Joi.string(),
   }),
 };
 

@@ -6,7 +6,7 @@ const createUser = {
     email: Joi.string().required().email(),
     password: Joi.string(),
     name: Joi.string().required(),
-    role: Joi.string().required().valid('driver', 'manager'),
+    role: Joi.string().required().valid('driver', 'manager', 'admin'),
     dob: Joi.date(),
     phone: Joi.string(),
     address: Joi.string(),
@@ -14,6 +14,7 @@ const createUser = {
     truckN: Joi.string(),
     licensePlate: Joi.string(),
     insuranceN: Joi.string(),
+    company: Joi.string(),
   }),
 };
 
@@ -29,6 +30,7 @@ const getUsers = {
     licensePlate: Joi.string(),
     insuranceN: Joi.string(),
     role: Joi.string(),
+    company: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -58,6 +60,8 @@ const updateUser = {
       truckN: Joi.string(),
       licensePlate: Joi.string(),
       insuranceN: Joi.string(),
+      company: Joi.string(),
+      role: Joi.string(),
     })
     .min(1),
 };

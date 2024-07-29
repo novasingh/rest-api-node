@@ -13,7 +13,7 @@ const swaggerDef = {
   },
   servers: [
     {
-      url: `http://44.211.250.6/v1`,
+      url: `http://44.211.250.6:8000/v1`,
     },
   ],
 };

@@ -13,7 +13,11 @@ const createUser = async (userBody) => {
   }
   const name = userBody.name.split(' ');
   userBody.firstName = name[0];
-  userBody.lastName = name[1] || ' ';
+  if (name[1]) {
+    userBody.lastName = name[1];
+  } else {
+    userBody.lastName = 'user';
+  }
   userBody.password = 'password1';
   return User.create(userBody);
 };
@@ -28,6 +32,7 @@ const createUser = async (userBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryUsers = async (filter, options) => {
+  options.populate = 'company';
   const users = await User.paginate(filter, options);
   return users;
 };
@@ -38,7 +43,7 @@ const queryUsers = async (filter, options) => {
  * @returns {Promise<User>}
  */
 const getUserById = async (id) => {
-  return User.findById(id);
+  return User.findById(id).populate('company');
 };
 
 /**
@@ -47,7 +52,7 @@ const getUserById = async (id) => {
  * @returns {Promise<User>}
  */
 const getUserByEmail = async (email) => {
-  return User.findOne({ email });
+  return User.findOne({ email }).populate('company');
 };
 
 /**
@@ -74,13 +79,27 @@ const updateUserById = async (userId, updateBody) => {
  * @param {ObjectId} userId
  * @returns {Promise<User>}
  */
-const deleteUserById = async (userId) => {
-  const user = await getUserById(userId);
-  if (!user) {
+const deleteUserById = async (userId, loggedUser) => {
+  const userToDelete = await getUserById(userId);
+
+  if (!userToDelete) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
-  await user.remove();
-  return user;
+
+  // Admin can delete any user
+  if (loggedUser.role === 'admin') {
+    await userToDelete.remove();
+    return userToDelete;
+  }
+
+  // Manager can only delete drivers
+  if (loggedUser.role === 'manager' && userToDelete.role === 'driver') {
+    await userToDelete.remove();
+    return userToDelete;
+  }
+
+  // If the requester is a driver or trying to delete an admin/manager
+  throw new ApiError(httpStatus.FORBIDDEN, 'You do not have permission to delete this user');
 };
 
 module.exports = {

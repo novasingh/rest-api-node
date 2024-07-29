@@ -16,6 +16,11 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   if (!user || !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
+
+  if (['driver', 'manager'].includes(user.role) && !user.company) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Please contact the administrator to assign the company');
+  }
+
   return user;
 };
 

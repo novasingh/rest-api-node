@@ -76,6 +76,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Company',
+    },
   },
   {
     timestamps: true,

@@ -13,7 +13,8 @@ components:
         lastName:
           type: string
         dob:
-          type: date
+          type: string
+          format: date
         phone:
           type: string
         address:
@@ -28,7 +29,7 @@ components:
           type: string              
         role:
           type: string
-          enum: [driver, manager]
+          enum: [driver, manager, admin]
       example:
         id: 5ebac534954b54139806c112
         email: fake@example.com
@@ -63,6 +64,67 @@ components:
           type: number
         message:
           type: string
+
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        message:
+          type: string
+        read:
+          type: boolean
+          default: false
+        createdAt:
+          type: string
+          format: date-time
+      example:
+        id: '60d5f484ef27b02c3f1433aa'
+        userId: '66a28b866ba2fcac0457e2a6'
+        message: 'You have a new document upload request.'
+        read: false
+        createdAt: '2021-06-25T12:00:00Z'
+
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+          format: uri
+        type:
+          type: string
+        manager:
+          type: string
+          description: 'ID of the manager associated with the company'
+      example:
+        id: '66a7748aa4d4487148a8510d'
+        name: 'HealMeFit'
+        logo: 'https://example.com/path/to/logo.png'
+        type: 'Health & Fitness'
+        manager: '66a28b866ba2fcac0457e2a6'
+
+    FitbitToken:
+      type: object
+      properties:
+        userId:
+          type: string
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresIn:
+          type: integer
+      example:
+        userId: '66a28b866ba2fcac0457e2a6'
+        accessToken: 'abc123'
+        refreshToken: 'xyz789'
+        expiresIn: 3600
 
   responses:
     DuplicateEmail:

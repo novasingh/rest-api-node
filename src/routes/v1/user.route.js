@@ -86,6 +86,11 @@ module.exports = router;
  *           type: string
  *         description: User role
  *       - in: query
+ *         name: company
+ *         schema:
+ *           type: string
+ *         description: Company Id
+ *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
