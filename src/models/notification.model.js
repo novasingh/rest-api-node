@@ -6,7 +6,9 @@ const { Schema } = mongoose;
 const notificationSchema = new Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   message: { type: String, required: true },
+  documentDescription: { type: String },
   isRead: { type: Boolean, default: false },
+  expireDate: { type: Date },
   createdAt: { type: Date, default: Date.now },
 });
 

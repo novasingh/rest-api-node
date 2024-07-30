@@ -74,9 +74,14 @@ components:
           type: string
         message:
           type: string
+        documentDescription:
+          type: string
         read:
           type: boolean
           default: false
+        expireDate:
+          type: string
+          format: date-time  
         createdAt:
           type: string
           format: date-time
@@ -126,6 +131,35 @@ components:
         refreshToken: 'xyz789'
         expiresIn: 3600
 
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum: [ID, Driver License, Resume, Vaccination Proof, HR Form, Other]
+        url:
+          type: string
+          format: uri
+        uploadedAt:
+          type: string
+          format: date-time
+      example:
+        id: '60d5f484ef27b02c3f1433aa'
+        userId: '66a28b866ba2fcac0457e2a6'
+        name: 'ID'
+        description: 'Front and back photo of ID'
+        type: 'ID'
+        url: 'https://example.com/path/to/id.jpg'
+        uploadedAt: '2021-06-25T12:00:00Z'
+        
   responses:
     DuplicateEmail:
       description: Email already taken

@@ -17,6 +17,8 @@ const getRequestDocuments = {
     managerId: Joi.string(),
     driverId: Joi.string(),
     documentName: Joi.string(),
+    documentDescription: Joi.string(),
+    expireDate: Joi.date(),
   }),
 };
 

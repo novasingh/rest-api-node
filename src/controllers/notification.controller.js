@@ -20,8 +20,14 @@ const getReadNotification = catchAsync(async (req, res) => {
 });
 
 const requestUploadDocuments = catchAsync(async (req, res) => {
-  const { managerId, driverId, documentName } = req.body;
-  const notification = await notificationService.uploadRequestDocuments(managerId, driverId, documentName);
+  const { managerId, driverId, documentName, documentDescription, expireDate } = req.body;
+  const notification = await notificationService.uploadRequestDocuments(
+    managerId,
+    driverId,
+    documentName,
+    documentDescription,
+    expireDate
+  );
   if (!notification) {
     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Document upload request not successfully');
   }

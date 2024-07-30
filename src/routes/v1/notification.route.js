@@ -18,7 +18,7 @@ router
   .route('/request-upload')
   .post(auth('manage'), validate(notificationValidation.getRequestDocuments), notificationController.requestUploadDocuments);
 
-  /**
+/**
  * @swagger
  * tags:
  *   name: Notifications
@@ -56,6 +56,11 @@ router
  *                     type: string
  *                   message:
  *                     type: string
+ *                   documentDescription:
+ *                     type: string
+ *                   expireDate:
+ *                     type: string
+ *                     format: date-time
  *                   isRead:
  *                     type: boolean
  *                   createdAt:
@@ -98,7 +103,7 @@ router
  *     summary: Request document upload from a driver
  *     tags: [Notifications]
  *     security:
- *       - bearerAuth: [] 
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -112,6 +117,11 @@ router
  *                 type: string
  *               documentName:
  *                 type: string
+ *               documentDescription:
+ *                 type: string
+ *               expireDate:
+ *                 type: string
+ *                 format: date-time
  *     responses:
  *       200:
  *         description: Document upload request sent successfully

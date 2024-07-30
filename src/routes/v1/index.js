@@ -4,6 +4,7 @@ const userRoute = require('./user.route');
 const fitbitTokenRoute = require('./fitbitToken.route');
 const notificationRoute = require('./notification.route');
 const companyRoute = require('./company.route');
+const documentRoute = require('./document.route');
 const docsRoute = require('./docs.route');
 // const config = require('../../config/config');
 
@@ -29,6 +30,10 @@ const defaultRoutes = [
   {
     path: '/companies',
     route: companyRoute,
+  },
+  {
+    path: '/document',
+    route: documentRoute,
   },
 ];
 
