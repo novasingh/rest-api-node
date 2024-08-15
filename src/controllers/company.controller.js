@@ -1,6 +1,5 @@
 const httpStatus = require('http-status');
 const companyService = require('../services/company.service');
-const { upload } = require('../services/upload.service');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
 const { uploadService } = require('../services');

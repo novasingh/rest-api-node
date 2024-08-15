@@ -28,6 +28,7 @@ const envVarsSchema = Joi.object()
     AWS_REGION: Joi.string().description('S3 Region'),
     AWS_ACCESS_KEY_ID: Joi.string().description('S3 AWS ACCESS KEY ID'),
     AWS_SECRET_ACCESS_KEY: Joi.string().description('S3 AWS SECRET ACCESS KEY'),
+    FRONTEND_URL: Joi.string().description('Frontend Web app URL')
   })
   .unknown();
 
@@ -71,4 +72,5 @@ module.exports = {
   s3Region: envVars.AWS_REGION,
   s3AccessKey: envVars.AWS_ACCESS_KEY_ID,
   s3SecretAccessKey: envVars.AWS_SECRET_ACCESS_KEY,
+  frontendUrl: envVars.FRONTEND_URL,
 };
