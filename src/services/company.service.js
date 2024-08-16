@@ -7,7 +7,7 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Array>}
  */
 const getAllCompanies = async () => {
-  return Company.find();
+  return Company.find().populate('user');
 };
 
 /**
