@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { Company } = require('../models');
 const ApiError = require('../utils/ApiError');
+const { updateUserById } = require('./user.service');
 
 /**
  * Get all companies
@@ -16,7 +17,14 @@ const getAllCompanies = async () => {
  * @returns {Promise<Company>}
  */
 const createCompany = async (companyBody) => {
-  return Company.create(companyBody);
+  const company = await Company.create(companyBody);
+  if (companyBody.manager) {
+    const data = {
+      company: company.id,
+    };
+    await updateUserById(companyBody.manager, data);
+  }
+  return company;
 };
 
 /**
@@ -40,6 +48,12 @@ const getCompanyById = async (id) => {
  */
 const updateCompanyById = async (companyId, updateBody) => {
   const company = await getCompanyById(companyId);
+  if (updateBody.manager) {
+    const data = {
+      company: companyId,
+    };
+    await updateUserById(updateBody.manager, data);
+  }
   Object.assign(company, updateBody);
   await company.save();
   return company;
