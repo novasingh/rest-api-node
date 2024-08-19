@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
 const logger = require('../config/logger');
+const { User } = require('../models');
 
 const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
@@ -31,6 +32,15 @@ const sendEmail = async (to, subject, text) => {
  * @returns {Promise}
  */
 const sendResetPasswordEmail = async (to, token) => {
+  // Fetch user information from the database
+  const user = await User.findOne({ email: to }).populate('company');
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  const { firstName, lastName } = user;
+
   const subject = 'Reset password';
   // replace this url with the link to the reset password page of your front-end app
   const resetPasswordUrl = `http://${config.frontendUrl}reset-password?token=${token}`;
@@ -38,7 +48,10 @@ const sendResetPasswordEmail = async (to, token) => {
   const template = await fs.readFile('src/services/templates/resetPassword.html', 'utf-8');
 
   // Replace placeholders with actual values
-  const htmlContent = template.replace('{{resetPasswordUrl}}', resetPasswordUrl);
+  // Replace placeholders with actual values
+  const htmlContent = template
+    .replace('{{resetPasswordUrl}}', resetPasswordUrl)
+    .replace('{{userName}}', `${`${firstName} ${lastName}`}`);
 
   const msg = { from: config.email.from, to, subject, html: htmlContent };
   await transport.sendMail(msg);
@@ -51,6 +64,15 @@ const sendResetPasswordEmail = async (to, token) => {
  * @returns {Promise}
  */
 const sendInvitationEmail = async (to, text, token) => {
+  // Fetch user information from the database
+  const user = await User.findOne({ email: to }).populate('company');
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  const { firstName, lastName } = user;
+
   const subject = 'Send Invitation Email';
   // replace this url with the link to the reset password page of your front-end app
   const resetPasswordUrl = `http://${config.frontendUrl}reset-password?token=${token}`;
@@ -58,7 +80,9 @@ const sendInvitationEmail = async (to, text, token) => {
   const template = await fs.readFile('src/services/templates/sendInvitationEmail.html', 'utf-8');
 
   // Replace placeholders with actual values
-  const htmlContent = template.replace('{{resetPasswordUrl}}', resetPasswordUrl, text);
+  const htmlContent = template
+    .replace('{{resetPasswordUrl}}', resetPasswordUrl)
+    .replace('{{userName}}', `${`${firstName} ${lastName}`}`);
 
   const msg = { from: config.email.from, to, subject, html: htmlContent };
   await transport.sendMail(msg);
