@@ -3,7 +3,7 @@ const companyService = require('../services/company.service');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
 const { uploadService } = require('../services');
-
+const pick = require('../utils/pick');
 
 /**
  * Get all companies
@@ -12,7 +12,9 @@ const { uploadService } = require('../services');
  * @returns {Promise<void>}
  */
 const getAllCompanies = catchAsync(async (req, res) => {
-  const companies = await companyService.getAllCompanies();
+  const filter = pick(req.query, ['name']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const companies = await companyService.queryCompanies(filter, options);
   if (!companies) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Companies not found');
   }

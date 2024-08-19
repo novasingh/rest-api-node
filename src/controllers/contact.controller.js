@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
 const { contactService } = require('../services');
+const pick = require('../utils/pick');
 
 /**
  * Get all contacts
@@ -10,12 +10,12 @@ const { contactService } = require('../services');
  * @returns {Promise<void>}
  */
 const getAllContacts = catchAsync(async (req, res) => {
-  const contacts = await contactService.getAllContacts();
-  if (!contacts) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'contacts not found');
-  }
-  res.status(httpStatus.OK).send(contacts);
+  const filter = pick(req.query, ['name']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await contactService.queryContact(filter, options);
+  res.send(result);
 });
+
 
 /**
  * Create a contact

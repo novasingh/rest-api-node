@@ -11,6 +11,13 @@ const getAllCompanies = async () => {
   return Company.find().populate('manager');
 };
 
+const queryCompanies = async (filter, options) => {
+  options.populate = 'manager';
+  const companies = await Company.paginate(filter, options);
+  return companies;
+};
+
+
 /**
  * Create a company
  * @param {Object} companyBody
@@ -76,4 +83,5 @@ module.exports = {
   updateCompanyById,
   deleteCompanyById,
   getAllCompanies,
+  queryCompanies,
 };

@@ -86,6 +86,10 @@ const deleteUserById = async (userId, loggedUser) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
 
+  if (loggedUser.email === 'admin@healmefit.io') {
+    throw new ApiError(httpStatus.FORBIDDEN, 'You do not have permission to delete this admin');
+  }
+
   // Admin can delete any user
   if (loggedUser.role === 'admin') {
     await userToDelete.remove();

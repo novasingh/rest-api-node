@@ -6,8 +6,9 @@ const ApiError = require('../utils/ApiError');
  * Get all contacts
  * @returns {Promise<Array>}
  */
-const getAllContacts = async () => {
-  return Contact.find();
+const queryContact = async (filter, options) => {
+  const contacts = await Contact.paginate(filter, options);
+  return contacts;
 };
 
 /**
@@ -58,8 +59,8 @@ const deleteContactById = async (contactId) => {
 
 module.exports = {
   createContact,
-  getAllContacts,
   updateContactById,
   deleteContactById,
   getContactById,
+  queryContact,
 };
