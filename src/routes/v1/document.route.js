@@ -7,15 +7,15 @@ const { documentController } = require('../../controllers');
 const router = express.Router();
 
 router
-  .route('/document/:userId/documents')
+  .route('/:userId/documents')
   .get(auth('manage'), validate(documentValidation.getDocument), documentController.getDocumentsByUserId);
 
 router
-  .route('/document/:userId/documents')
+  .route('/:userId/documents')
   .post(auth('manage'), validate(documentValidation.uploadDocument), documentController.uploadDocument);
 
 router
-  .route('/document/:userId/documents/:documentId')
+  .route('/:userId/documents/:documentId')
   .delete(auth('manage'), validate(documentValidation.deleteDocument), documentController.deleteDocument);
 
 module.exports = router;
