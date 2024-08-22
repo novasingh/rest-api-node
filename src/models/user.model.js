@@ -80,6 +80,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    healthData: {
+      type: mongoose.Schema.Types.Mixed,
+      default: {},
+    },
     company: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Company',
