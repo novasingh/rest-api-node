@@ -62,6 +62,7 @@ const updateUser = {
       company: Joi.string(),
       role: Joi.string(),
       healthData: Joi.object().optional(),
+      healthScore: Joi.string(),
     })
     .min(1),
 };
