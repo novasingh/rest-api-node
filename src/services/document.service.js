@@ -7,9 +7,9 @@ const getDocumentsByUserId = async (userId) => {
 };
 
 const uploadDocument = async (userId, metadata) => {
-  const { name, description, type, fileUrl } = metadata;
+  const { name, description, type, fileUrl, expireAt } = metadata;
 
-  const document = new Document({ userId, name, description, fileUrl, type });
+  const document = new Document({ userId, name, description, fileUrl, type, expireAt });
   await document.save();
   return document;
 };
