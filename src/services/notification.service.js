@@ -51,8 +51,10 @@ const uploadRequestDocuments = async (managerId, driverId, documentName, documen
       throw new ApiError(httpStatus.BAD_REQUEST, 'Driver not found');
     }
 
+    const name = manager?.firstName ? manager?.firstName : ''
+
     // Create notification
-    const message = `Manager ${manager.firstName} has requested you to upload ${documentName}`;
+    const message = `Manager ${name} has requested you to upload ${documentName}`;
     const notification = await createNotification(driverId, message, documentDescription, expireDate);
 
     return notification;
