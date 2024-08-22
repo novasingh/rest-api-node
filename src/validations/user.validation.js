@@ -52,6 +52,7 @@ const updateUser = {
     .keys({
       firstName: Joi.string(),
       lastName: Joi.string(),
+      email: Joi.string(),
       dob: Joi.date(),
       phone: Joi.string(),
       address: Joi.string(),
