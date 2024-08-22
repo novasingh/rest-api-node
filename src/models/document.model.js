@@ -6,7 +6,7 @@ const documentSchema = new mongoose.Schema({
   description: { type: String },
   fileUrl: { type: String, required: true },
   uploadDate: { type: Date, default: Date.now },
-  expireAt: { type: Date, default: null },
+  expireAt: { type: String, default: null },
   type: { type: String, enum: ['ID', 'Driver License', 'Resume', 'Vaccination Proof', 'HR Form', 'Other'], required: true },
 });
 
