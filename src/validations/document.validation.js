@@ -15,6 +15,7 @@ const uploadDocument = {
     description: Joi.string().allow(''),
     fileUrl: Joi.string().required(),
     type: Joi.string().valid('ID', 'Driver License', 'Resume', 'Vaccination Proof', 'HR Form', 'Other').required(),
+    expireAt: Joi.string(),
   }),
 };
 
