@@ -57,13 +57,15 @@ module.exports = router;
  *                 type: string
  *               expires:
  *                 type: string
- *                 format: date-time
+ *               fitbitUserId:
+ *                 type: string
  *             example:
  *               accessToken: ABC
  *               refreshToken: ABC
  *               user: 669ac02f47a5543b4c7ba0d6
  *               type: Bearer
- *               expires: 2024-07-23T10:30:00Z
+ *               expires: 3600
+ *               fitbitUserId: CDS451
  *     responses:
  *       '200':
  *         description: Token saved successfully

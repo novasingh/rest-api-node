@@ -125,11 +125,14 @@ components:
           type: string
         expiresIn:
           type: integer
+        fitbitUserId:
+          type: string  
       example:
         userId: '66a28b866ba2fcac0457e2a6'
         accessToken: 'abc123'
         refreshToken: 'xyz789'
         expiresIn: 3600
+        fitbitUserId: 'CDFS451'
 
     Document:
       type: object

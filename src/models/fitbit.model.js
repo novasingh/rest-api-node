@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
+const { string } = require('joi');
 
 const fitbitTokenSchema = mongoose.Schema(
   {
@@ -23,12 +24,11 @@ const fitbitTokenSchema = mongoose.Schema(
       required: true,
     },
     expires: {
-      type: Date,
-      required: true,
-    },
-    code: {
       type: String,
       required: true,
+    },
+    fitbitUserId: {
+      type: String,
     },
   },
   {
