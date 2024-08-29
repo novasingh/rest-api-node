@@ -136,7 +136,10 @@ const sendRatingEmail = async (data) => {
   const template = await fs.readFile('src/services/templates/sendEmailRating.html', 'utf-8');
 
   // Replace placeholders with actual values
-  const htmlContent = template.replace('{{name}}', `${firstName} ${lastName}`).replace('{{rating}}', data.rating);
+  const htmlContent = template
+    .replace('{{name}}', `${firstName} ${lastName}`)
+    .replace('{{rating}}', data.rating)
+    .replace('{{feedback}}', data.feedback);
 
   const msg = { from: config.email.from, to: config.clientEmailId, subject, html: htmlContent };
   await transport.sendMail(msg);
