@@ -131,7 +131,7 @@ const sendRatingEmail = async (data) => {
 
   const { firstName, lastName } = user;
 
-  const subject = 'Youu have new query for rating healmefit.io';
+  const subject = 'You have new feedback';
 
   const template = await fs.readFile('src/services/templates/sendEmailRating.html', 'utf-8');
 
