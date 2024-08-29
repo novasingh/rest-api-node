@@ -104,10 +104,29 @@ If you did not create an account, then ignore this email.`;
   await sendEmail(to, subject, text);
 };
 
+const sendContactEmail = async (data) => {
+  const { name, email, phone, message } = data;
+
+  const subject = 'Youu have new query for healmefit.io';
+
+  const template = await fs.readFile('src/services/templates/sendEmailContact.html', 'utf-8');
+
+  // Replace placeholders with actual values
+  const htmlContent = template
+    .replace('{{name}}', name)
+    .replace('{{phone}}', phone)
+    .replace('{{email}}', email)
+    .replace('{{message}}', message);
+
+  const msg = { from: config.email.from, to: config.clientEmailId, subject, html: htmlContent };
+  await transport.sendMail(msg);
+};
+
 module.exports = {
   transport,
   sendEmail,
   sendResetPasswordEmail,
   sendVerificationEmail,
   sendInvitationEmail,
+  sendContactEmail,
 };

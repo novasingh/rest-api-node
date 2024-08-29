@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { Contact } = require('../models');
 const ApiError = require('../utils/ApiError');
+const { sendContactEmail } = require('./email.service');
 
 /**
  * Get all contacts
@@ -17,7 +18,9 @@ const queryContact = async (filter, options) => {
  * @returns {Promise<Company>}
  */
 const createContact = async (contactBody) => {
-  return Contact.create(contactBody);
+  const contact = await Contact.create(contactBody);
+  await sendContactEmail(contact);
+  return contact;
 };
 
 /**

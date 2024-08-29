@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
-const { string } = require('joi');
 
 const fitbitTokenSchema = mongoose.Schema(
   {
