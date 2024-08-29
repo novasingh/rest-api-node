@@ -45,6 +45,8 @@ module.exports = router;
  *                 type: string
  *               rating:
  *                 type: number
+ *               feedback:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Rating created successfully
@@ -113,6 +115,8 @@ module.exports = router;
  *                 type: string
  *               rating:
  *                 type: number
+ *               feedback:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Rating updated successfully

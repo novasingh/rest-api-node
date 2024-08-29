@@ -4,6 +4,7 @@ const createRating = {
   body: Joi.object().keys({
     userId: Joi.string().required(),
     rating: Joi.number().required(),
+    feedback: Joi.string(),
   }),
 };
 
@@ -19,6 +20,7 @@ const updateRating = {
   }),
   body: Joi.object().keys({
     rating: Joi.number().required(),
+    feedback: Joi.string(),
   }),
 };
 
