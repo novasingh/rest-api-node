@@ -22,10 +22,10 @@ const getAllContacts = catchAsync(async (req, res) => {
  * @param {Object} res - Express response object
  * @returns {Promise<void>}
  */
-const createContact = async (req, res) => {
+const createContact = catchAsync(async (req, res) => {
   const contact = await contactService.createContact(req.body);
   res.status(httpStatus.CREATED).send(contact);
-};
+});
 
 /**
  * Get contact by id
@@ -44,10 +44,10 @@ const getContactById = async (req, res) => {
  * @param {Object} res - Express response object
  * @returns {Promise<void>}
  */
-const updateContactById = async (req, res) => {
+const updateContactById = catchAsync(async (req, res) => {
   const contact = await contactService.updateContactById(req.params.id, req.body);
   res.send(contact);
-};
+});
 
 /**
  * Delete contact by id

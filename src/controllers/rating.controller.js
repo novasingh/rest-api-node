@@ -22,10 +22,10 @@ const getAllRatings = catchAsync(async (req, res) => {
  * @param {Object} res - Express response object
  * @returns {Promise<void>}
  */
-const createRating = async (req, res) => {
+const createRating = catchAsync(async (req, res) => {
   const rating = await ratingService.createRating(req.body);
   res.status(httpStatus.CREATED).send(rating);
-};
+});
 
 /**
  * Get rating by id
@@ -33,10 +33,10 @@ const createRating = async (req, res) => {
  * @param {Object} res - Express response object
  * @returns {Promise<void>}
  */
-const getRatingById = async (req, res) => {
+const getRatingById = catchAsync(async (req, res) => {
   const rating = await ratingService.getRatingById(req.params.id);
   res.send(rating);
-};
+});
 
 /**
  * Update rating by id
@@ -44,10 +44,10 @@ const getRatingById = async (req, res) => {
  * @param {Object} res - Express response object
  * @returns {Promise<void>}
  */
-const updateRatingById = async (req, res) => {
+const updateRatingById = catchAsync(async (req, res) => {
   const rating = await ratingService.updateRatingById(req.params.id, req.body);
   res.send(rating);
-};
+});
 
 /**
  * Delete rating by id
@@ -55,10 +55,10 @@ const updateRatingById = async (req, res) => {
  * @param {Object} res - Express response object
  * @returns {Promise<void>}
  */
-const deleteRating = async (req, res) => {
+const deleteRating = catchAsync(async (req, res) => {
   await ratingService.deleteRatingById(req.params.id);
   res.status(httpStatus.NO_CONTENT).send();
-};
+});
 
 module.exports = {
   getAllRatings,
