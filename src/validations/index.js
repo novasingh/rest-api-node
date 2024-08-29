@@ -5,3 +5,4 @@ module.exports.notificationValidation = require('./notification.validation');
 module.exports.companyValidation = require('./company.validation');
 module.exports.documentValidation = require('./document.validation');
 module.exports.contactValidation = require('./contact.validation');
+module.exports.ratingValidation = require('./rating.validation');

@@ -7,6 +7,7 @@ const companyRoute = require('./company.route');
 const documentRoute = require('./document.route');
 const contactRoute = require('./contact.route');
 const docsRoute = require('./docs.route');
+const ratingRoute = require('./rating.route');
 // const config = require('../../config/config');
 
 const router = express.Router();
@@ -39,6 +40,10 @@ const defaultRoutes = [
   {
     path: '/contact',
     route: contactRoute,
+  },
+  {
+    path: '/rating',
+    route: ratingRoute,
   },
 ];
 

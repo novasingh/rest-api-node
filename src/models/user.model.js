@@ -88,6 +88,14 @@ const userSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Company',
     },
+    rating: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Rating',
+    },
+    ratingBefore: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

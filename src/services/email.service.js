@@ -122,6 +122,26 @@ const sendContactEmail = async (data) => {
   await transport.sendMail(msg);
 };
 
+const sendRatingEmail = async (data) => {
+  const user = await User.findOne({ _id: data.userId });
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  const { firstName, lastName } = user;
+
+  const subject = 'Youu have new query for rating healmefit.io';
+
+  const template = await fs.readFile('src/services/templates/sendEmailRating.html', 'utf-8');
+
+  // Replace placeholders with actual values
+  const htmlContent = template.replace('{{name}}', `${firstName} ${lastName}`).replace('{{rating}}', data.rating);
+
+  const msg = { from: config.email.from, to: config.clientEmailId, subject, html: htmlContent };
+  await transport.sendMail(msg);
+};
+
 module.exports = {
   transport,
   sendEmail,
@@ -129,4 +149,5 @@ module.exports = {
   sendVerificationEmail,
   sendInvitationEmail,
   sendContactEmail,
+  sendRatingEmail,
 };

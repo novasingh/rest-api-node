@@ -32,6 +32,8 @@ const getUsers = {
     insuranceN: Joi.string(),
     role: Joi.string(),
     company: Joi.string(),
+    rating: Joi.string(),
+    ratingBefore: Joi.boolean(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),

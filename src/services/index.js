@@ -8,3 +8,4 @@ module.exports.companyService = require('./company.service');
 module.exports.uploadService = require('./upload.service');
 module.exports.documentService = require('./document.service');
 module.exports.contactService = require('./contact.service');
+module.exports.ratingService = require('./rating.service');
