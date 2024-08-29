@@ -11,7 +11,6 @@ const ratingSchema = new mongoose.Schema({
   },
   feedback: {
     type: String,
-    default: null,
   },
   createdAt: {
     type: Date,
