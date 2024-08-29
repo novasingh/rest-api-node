@@ -74,7 +74,7 @@ const deleteRatingById = async (id) => {
     rating: null,
     ratingBefore: false,
   };
-  await updateUserById(id, data);
+  await updateUserById(rating.userId, data);
   return rating;
 };
 
