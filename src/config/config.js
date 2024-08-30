@@ -30,6 +30,8 @@ const envVarsSchema = Joi.object()
     AWS_SECRET_ACCESS_KEY: Joi.string().description('S3 AWS SECRET ACCESS KEY'),
     FRONTEND_URL: Joi.string().description('Frontend Web app URL'),
     CLIENT_EMAIL_ID: Joi.string().description('Client Email ID'),
+    FITBIT_CLIENT_ID: Joi.string().description('Fitbit Client ID'),
+    FITBIT_CLIENT_SECRET: Joi.string().description('Fitbit Client Secret'),
   })
   .unknown();
 
@@ -75,4 +77,6 @@ module.exports = {
   s3SecretAccessKey: envVars.AWS_SECRET_ACCESS_KEY,
   frontendUrl: envVars.FRONTEND_URL,
   clientEmailId: envVars.CLIENT_EMAIL_ID,
+  fitBitClientId: envVars.FITBIT_CLIENT_ID,
+  fitBitClientSecret: envVars.FITBIT_CLIENT_SECRET,
 };

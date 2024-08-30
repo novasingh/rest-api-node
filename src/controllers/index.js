@@ -6,3 +6,4 @@ module.exports.companyController = require('./company.controller');
 module.exports.documentController = require('./document.controller');
 module.exports.contactController = require('./contact.controller');
 module.exports.ratingController = require('./rating.controller');
+module.exports.fitbitUserDataController = require('./fitbitUserData.controller');

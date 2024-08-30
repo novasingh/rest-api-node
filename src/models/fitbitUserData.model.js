@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const userFitbitDataSchema = new mongoose.Schema({
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   date: { type: Date, default: Date.now },
-  profileData: {
+  profile: {
     type: mongoose.Schema.Types.Mixed,
     default: {},
   },
-  deviceData: {
+  device: {
     type: mongoose.Schema.Types.Mixed,
     default: {},
   },
@@ -20,6 +20,10 @@ const userFitbitDataSchema = new mongoose.Schema({
     default: {},
   },
   sleep: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {},
+  },
+  heart: {
     type: mongoose.Schema.Types.Mixed,
     default: {},
   },

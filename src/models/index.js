@@ -6,3 +6,4 @@ module.exports.Company = require('./company.model');
 module.exports.Document = require('./document.model');
 module.exports.Contact = require('./contact.model');
 module.exports.Rating = require('./rating.model');
+module.exports.FitbitUserData = require('./fitbitUserData.model');
