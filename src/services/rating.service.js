@@ -9,7 +9,7 @@ const { sendRatingEmail } = require('./email.service');
  * @returns {Promise<Array>}
  */
 const queryRating = async (filter, options) => {
-  options.populate = 'user';
+  options.populate = 'userId';
   const rating = await Rating.paginate(filter, options);
   return rating;
 };
@@ -27,7 +27,7 @@ const createRating = async (ratingBody) => {
   const rating = await Rating.create(ratingBody);
   if (ratingBody.rating) {
     const data = {
-      rating: rating.userId,
+      rating: rating.id,
       ratingBefore: true,
     };
     await updateUserById(rating.userId, data);

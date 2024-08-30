@@ -32,7 +32,7 @@ const createUser = async (userBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryUsers = async (filter, options) => {
-  options.populate = 'company, rating'
+  options.populate = 'company'
   const users = await User.paginate(filter, options);
   return users;
 };
