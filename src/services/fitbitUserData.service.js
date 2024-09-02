@@ -10,8 +10,7 @@ const refreshFitbitToken = async (token) => {
     const response = await axios.post('https://api.fitbit.com/oauth2/token', {
       grant_type: 'refresh_token',
       refresh_token: token.refreshToken,
-      client_id: fitBitClientId,
-      client_secret: fitBitClientSecret,
+      client_id: fitBitClientId
     });
 
     token.accessToken = response.data.access_token;
@@ -21,7 +20,7 @@ const refreshFitbitToken = async (token) => {
     return token;
   } catch (error) {
     await Logs.create({
-      user_id: token.user_id,
+      userId: token.user,
       action: 'Refresh Fitbit Token',
       status: 'ERROR',
       message: error.message,
@@ -49,7 +48,7 @@ const fetchFitbitData = async (token) => {
     };
   } catch (error) {
     await Logs.create({
-      user_id: token.user_id,
+      userId: token.user,
       action: 'Fetch Fitbit Data',
       status: 'ERROR',
       message: error.message,
@@ -60,12 +59,11 @@ const fetchFitbitData = async (token) => {
 
 // Function to synchronize Fitbit data for all users
 const syncFitbitData = async () => {
-
   const fitbitTokens = await FitbitToken.find();
 
   for (const token of fitbitTokens) {
     try {
-      if (new Date() >= token.expires_at) {
+      if (new Date() >= new Date(token.expires)) {
         await refreshFitbitToken(token);
       }
 
@@ -80,14 +78,14 @@ const syncFitbitData = async () => {
       });
 
       await Logs.create({
-        user_id: token.user_id,
+        userId: token.user,
         action: 'Sync Fitbit Data',
         status: 'success',
         message: 'Data synced successfully',
       });
     } catch (error) {
       await Logs.create({
-        user_id: token.user_id,
+        userId: token.user,
         action: 'Insert Data in DB',
         status: 'ERROR',
         message: 'Data synced failed',
