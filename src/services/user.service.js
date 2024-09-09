@@ -69,6 +69,14 @@ const updateUserById = async (userId, updateBody) => {
   if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
+
+ // Remove empty fields from updateBody
+  Object.keys(updateBody).forEach((key) => {
+    if (updateBody[key] === '' || updateBody[key] === null || updateBody[key] === undefined) {
+      delete updateBody[key];
+    }
+  });
+
   Object.assign(user, updateBody);
   await user.save();
   return user;
