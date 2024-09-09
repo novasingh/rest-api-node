@@ -46,26 +46,32 @@ const userSchema = mongoose.Schema(
     phone: {
       type: String,
       trim: true,
+      default: '',
     },
     address: {
       type: String,
       trim: true,
+      default: '',
     },
     driverN: {
       type: String,
       trim: true,
+      default: '',
     },
     truckN: {
       type: String,
       trim: true,
+      default: '',
     },
     licensePlate: {
       type: String,
       trim: true,
+      default: '',
     },
     insuranceN: {
       type: String,
       trim: true,
+      default: '',
     },
     healthScore: {
       type: String,
